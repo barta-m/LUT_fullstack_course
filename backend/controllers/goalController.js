@@ -6,7 +6,7 @@ const getGoals = (req, res) => {
 
 // @desc    Set goals
 // @route   POST /api/goals:id
-const setGoals = (req, res) => {
+const setGoal = (req, res) => {
   res.status(200).json({ message: "Set goal" });
 };
 
@@ -22,4 +22,4 @@ const deleteGoal = (req, res) => {
   res.status(200).json({ message: `Delete goal ${req.params.id}` });
 };
 
-module.exports = { getGoals, setGoals, updateGoal, deleteGoal };
+module.exports = { getGoals, setGoal, updateGoal, deleteGoal };
