@@ -191,6 +191,50 @@ h3 {
   animation: spin 1.2s linear infinite;
 }
 
+.flag-btn {
+  background-color: #f0f0f0;
+  border: none;
+  color: #333;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.flag-btn:hover {
+  background-color: #d6d6d6;
+}
+
+.flagged {
+  background-color: #ffcccc;
+  color: #900;
+}
+
+.goal {
+  background-color: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.goal:hover {
+  transform: translateY(-5px);
+}
+
+.goal-date {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.goal-text {
+  font-size: 1.25rem;
+  color: #333;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);

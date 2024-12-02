@@ -140,7 +140,6 @@ export const goalSlice = createSlice({
       .addCase(toggleFlag.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        // Aktualizace konkrétního cíle
         const updatedGoal = state.goals.find(
           (goal) => goal._id === action.payload._id
         );
