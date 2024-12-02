@@ -15,6 +15,18 @@ const createGoal = async (goalData, token) => {
   return response.data;
 };
 
+// Toggle flag status
+const toggleFlag = async (id, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.patch(`${API_URL}${id}/flag`, {}, config);
+  return response.data;
+};
+
 // Get user goals
 const getGoals = async (token) => {
   const config = {
@@ -45,6 +57,7 @@ const goalService = {
   createGoal,
   getGoals,
   deleteGoal,
+  toggleFlag,
 };
 
 export default goalService;

@@ -23,6 +23,7 @@ const setGoal = asyncHandler(async (req, res) => {
 
   const goal = await Goal.create({
     text: req.body.text,
+    isFlagged: req.body.isFlagged || false,
     user: req.user.id,
   });
 
@@ -87,9 +88,39 @@ const deleteGoal = asyncHandler(async (req, res) => {
   res.status(200).json({ id: req.params.id });
 });
 
+// @desc    Toggle flag status
+// @route   PATCH /api/goals/:id/flag
+// @access  Private
+const toggleFlag = asyncHandler(async (req, res) => {
+  const goal = await Goal.findById(req.params.id);
+
+  if (!goal) {
+    res.status(400);
+    throw new Error("Goal not found");
+  }
+
+  // Check for user
+  if (!req.user) {
+    res.status(401);
+    throw new Error("User not found");
+  }
+
+  // Make sure the logged in user matches the goal user
+  if (goal.user.toString() !== req.user.id) {
+    res.status(401);
+    throw new Error("User not authorized");
+  }
+
+  goal.isFlagged = !goal.isFlagged;
+  await goal.save();
+
+  res.status(200).json(goal);
+});
+
 module.exports = {
   getGoals,
   setGoal,
   updateGoal,
   deleteGoal,
+  toggleFlag,
 };

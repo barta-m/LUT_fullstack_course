@@ -28,6 +28,25 @@ export const createGoal = createAsyncThunk(
   }
 );
 
+// Toggle flag for a goal
+export const toggleFlag = createAsyncThunk(
+  "goals/toggleFlag",
+  async (id, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await goalService.toggleFlag(id, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 // Get user goals
 export const getGoals = createAsyncThunk(
   "goals/getAll",
@@ -111,6 +130,25 @@ export const goalSlice = createSlice({
         );
       })
       .addCase(deleteGoal.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(toggleFlag.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(toggleFlag.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        // Aktualizace konkrétního cíle
+        const updatedGoal = state.goals.find(
+          (goal) => goal._id === action.payload._id
+        );
+        if (updatedGoal) {
+          updatedGoal.isFlagged = action.payload.isFlagged;
+        }
+      })
+      .addCase(toggleFlag.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
