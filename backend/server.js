@@ -4,9 +4,10 @@ const port = process.env.PORT || 5001;
 const { errorHandler } = require("./middleware/errorMiddleware");
 const colors = require("colors");
 const connectDB = require("./config/db");
-const app = express();
 
 connectDB();
+
+const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
