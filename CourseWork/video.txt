@@ -1,0 +1,6 @@
+Student name: Martin Bárta
+
+Video demo accessible at:
+https://drive.google.com/file/d/1aIBNUDqjgIcfZJ1rDwga3SGvolnbTRpt/view?usp=sharing
+
+The app is not up in Heroku due to hourly billing, but if it needs to be up I can deploy it again on request, thank you.
